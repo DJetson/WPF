@@ -23,16 +23,19 @@ namespace ShapeOptimization.ViewModels
             Size = new Size(10, 10);
         }
 
-        public PointViewModel(ISelectionContext context) : base(context)
+        public PointViewModel(ISelectionContext context, MainWindowViewModel parent) : base(context)
         {
+            Parent = parent;
             Size = new Size(10, 10);
         }
+
+        private MainWindowViewModel Parent { get; }
 
         public override void MouseDown(Point position)
         {
             _IsMouseDown = true;
 
-            if (MainWindowViewModel.Mode == EditMode.SelectItem)
+            if (Parent.Mode == EditMode.SelectItem)
                 Select();
         }
 

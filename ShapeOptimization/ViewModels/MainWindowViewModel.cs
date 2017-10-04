@@ -9,7 +9,7 @@ namespace ShapeOptimization.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, IHandlesMouseEvents
     {
-        private static EditMode _Mode = EditMode.None;
+        private EditMode _Mode = EditMode.None;
         private bool _IsMousePressed = false;
 
         private ObservableCollection<IDrawableItem> _Items = new ObservableCollection<IDrawableItem>();
@@ -19,7 +19,7 @@ namespace ShapeOptimization.ViewModels
             set { _Items = value; NotifyPropertyChanged(); }
         }
 
-        public static EditMode Mode { get => _Mode; }
+        public EditMode Mode { get => _Mode; }
 
         private ISelectionContext _SelectionContext = new SelectionContext();
         public ISelectionContext SelectionContext => _SelectionContext;
@@ -67,12 +67,12 @@ namespace ShapeOptimization.ViewModels
 
         private void AddLine(Point position)
         {
-            Items.Add(new LineViewModel(SelectionContext) { Start = position, End = position });
+            Items.Add(new LineViewModel(SelectionContext, this) { Start = position, End = position });
         }
 
         private void AddPoint(Point position)
         {
-            Items.Add(new PointViewModel(SelectionContext) { Position = position });
+            Items.Add(new PointViewModel(SelectionContext, this) { Position = position });
         }
     }
 }

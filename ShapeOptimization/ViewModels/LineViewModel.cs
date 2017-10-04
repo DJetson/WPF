@@ -54,14 +54,17 @@ namespace ShapeOptimization.ViewModels
             Size = new Size(0, 10);
         }
 
-        public LineViewModel(ISelectionContext context) : base(context)
+        public LineViewModel(ISelectionContext context, MainWindowViewModel parent) : base(context)
         {
+            Parent = parent;
             Size = new Size(0, 10);
         }
 
+        private MainWindowViewModel Parent { get; }
+
         public override void MouseDown(Point position)
         {
-            if (MainWindowViewModel.Mode == EditMode.SelectItem)
+            if (Parent.Mode == EditMode.SelectItem)
                 Select();
             //TODO:
             //Check whether it's closer to the start point, end point, or center
