@@ -1,0 +1,4 @@
+﻿This library was originally created by Ashley Davis and published to CodeProject. Minor changes have been
+made by me, Dustin Malicoat, in the form of namespace and class name changes. Additionally, the source code
+has been moved into a new stand-alone library project so that it could be referenced more easily by my own work.
+This project contains the only code written by Ashley Davis.

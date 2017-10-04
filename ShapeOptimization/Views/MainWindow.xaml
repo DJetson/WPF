@@ -1,0 +1,53 @@
+﻿<Window x:Class="ShapeOptimization.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Behaviors="clr-namespace:ShapeOptimization.Behaviors"
+        xmlns:Commands="clr-namespace:ShapeOptimization.Commands"
+        xmlns:ViewModels="clr-namespace:ShapeOptimization.ViewModels"
+        xmlns:Views="clr-namespace:ShapeOptimization.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Commands:AddPointCommand x:Key="AddPointCommand"/>
+        <Commands:AddLineCommand x:Key="AddLineCommand"/>
+        <Commands:SelectItemCommand x:Key="SelectItemCommand"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Point" Command="{StaticResource AddPointCommand}" CommandParameter="{Binding }"/>
+            <Button Grid.Column="1" Content="Line" Command="{StaticResource AddLineCommand}" CommandParameter="{Binding }"/>
+            <Button Grid.Column="2" Content="Select" Command="{StaticResource SelectItemCommand}" CommandParameter="{Binding }"/>
+        </Grid>
+        <ItemsControl Background="Transparent" Grid.Row="2" ItemsSource="{Binding Items}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <i:Interaction.Behaviors>
+                <Behaviors:TrackMouseEvents />
+            </i:Interaction.Behaviors>
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type ViewModels:PointViewModel}">
+                    <Views:PointView DataContext="{Binding }"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:LineViewModel}">
+                    <Views:LineView DataContext="{Binding }"/>
+                </DataTemplate>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</Window>
