@@ -5,16 +5,10 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Behaviors="clr-namespace:ShapeOptimization.Behaviors"
-        xmlns:Commands="clr-namespace:ShapeOptimization.Commands"
         xmlns:ViewModels="clr-namespace:ShapeOptimization.ViewModels"
         xmlns:Views="clr-namespace:ShapeOptimization.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <Commands:AddPointCommand x:Key="AddPointCommand"/>
-        <Commands:AddLineCommand x:Key="AddLineCommand"/>
-        <Commands:SelectItemCommand x:Key="SelectItemCommand"/>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,9 +21,9 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Point" Command="{StaticResource AddPointCommand}" CommandParameter="{Binding }"/>
-            <Button Grid.Column="1" Content="Line" Command="{StaticResource AddLineCommand}" CommandParameter="{Binding }"/>
-            <Button Grid.Column="2" Content="Select" Command="{StaticResource SelectItemCommand}" CommandParameter="{Binding }"/>
+            <RadioButton Grid.Column="0" GroupName="ModeGroup" IsChecked="{Binding IsInAddPointMode}">Point</RadioButton>
+            <RadioButton Grid.Column="1" GroupName="ModeGroup" IsChecked="{Binding IsInAddLineMode}">Line</RadioButton>
+            <RadioButton Grid.Column="2" GroupName="ModeGroup" IsChecked="{Binding IsInSelectItemMode}">Select</RadioButton>
         </Grid>
         <ItemsControl Background="Transparent" Grid.Row="2" ItemsSource="{Binding Items}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <i:Interaction.Behaviors>

@@ -12,6 +12,78 @@ namespace ShapeOptimization.ViewModels
         private EditMode _Mode = EditMode.None;
         private bool _IsMousePressed = false;
 
+        public bool IsInAddPointMode
+        {
+            get
+            {
+                return _Mode == EditMode.AddPoint;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    _Mode = EditMode.AddPoint;
+                }
+                else
+                {
+                    _Mode = EditMode.None;
+                }
+
+                NotifyPropertyChanged(nameof(IsInAddLineMode));
+                NotifyPropertyChanged(nameof(IsInAddPointMode));
+                NotifyPropertyChanged(nameof(IsInSelectItemMode));
+            }
+        }
+
+        public bool IsInAddLineMode
+        {
+            get
+            {
+                return _Mode == EditMode.AddLine;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    _Mode = EditMode.AddLine;
+                }
+                else
+                {
+                    _Mode = EditMode.None;
+                }
+
+                NotifyPropertyChanged(nameof(IsInAddLineMode));
+                NotifyPropertyChanged(nameof(IsInAddPointMode));
+                NotifyPropertyChanged(nameof(IsInSelectItemMode));
+            }
+        }
+
+        public bool IsInSelectItemMode
+        {
+            get
+            {
+                return _Mode == EditMode.SelectItem;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    _Mode = EditMode.SelectItem;
+                }
+                else
+                {
+                    _Mode = EditMode.None;
+                }
+
+                NotifyPropertyChanged(nameof(IsInAddLineMode));
+                NotifyPropertyChanged(nameof(IsInAddPointMode));
+                NotifyPropertyChanged(nameof(IsInSelectItemMode));
+            }
+        }
+
         private ObservableCollection<IDrawableItem> _Items = new ObservableCollection<IDrawableItem>();
         public ObservableCollection<IDrawableItem> Items
         {
@@ -49,7 +121,7 @@ namespace ShapeOptimization.ViewModels
         {
             SelectionContext.ClearSelection();
         }
-        
+
         public void MouseUp(Point position)
         {
             if (_Mode == EditMode.AddPoint)
