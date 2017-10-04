@@ -74,9 +74,6 @@
     <Compile Include="Behaviors\TrackMouseMove.cs" />
     <Compile Include="Behaviors\TrackMouseUp.cs" />
     <Compile Include="Classes\SelectionContext.cs" />
-    <Compile Include="Commands\AddLineCommand.cs" />
-    <Compile Include="Commands\AddPointCommand.cs" />
-    <Compile Include="Commands\SelectItemCommand.cs" />
     <Compile Include="Interfaces\IDrawableItem.cs" />
     <Compile Include="Interfaces\IHandlesMouseDown.cs" />
     <Compile Include="Interfaces\IHandlesMouseEvents.cs" />
@@ -84,6 +81,7 @@
     <Compile Include="Interfaces\IHandlesMouseUp.cs" />
     <Compile Include="Interfaces\ISelectionContext.cs" />
     <Compile Include="Interfaces\ISelectableItem.cs" />
+    <Compile Include="Models\EditMode.cs" />
     <Compile Include="ViewModels\DrawableViewModelBase.cs" />
     <Compile Include="ViewModels\LineViewModel.cs" />
     <Compile Include="ViewModels\SelectableItemViewModelBase.cs" />

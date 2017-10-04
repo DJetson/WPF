@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeOptimization", "ShapeOptimization\ShapeOptimization.csproj", "{187197F3-2A41-4381-894D-82D3F9F70541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6A733FDB-49D6-4E09-AA60-EDAAAA9DA765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeOptimization", "test\ShapeOptimization\ShapeOptimization.csproj", "{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{187197F3-2A41-4381-894D-82D3F9F70541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{187197F3-2A41-4381-894D-82D3F9F70541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{187197F3-2A41-4381-894D-82D3F9F70541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A1CFB3A-CEC8-4B5F-9018-6616EC6E75F7} = {6A733FDB-49D6-4E09-AA60-EDAAAA9DA765}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1122334A-A701-4288-821C-E7064BB8B6B4}
