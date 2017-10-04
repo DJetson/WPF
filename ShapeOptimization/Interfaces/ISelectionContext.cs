@@ -14,5 +14,7 @@ namespace ShapeOptimization.Interfaces
         void InvertSelection();
         void Select(ISelectableItem item);
         void Deselect(ISelectableItem item);
+        ISelectableItem Current { get; }
+        bool IsMultiSelectEnabled { get; }
     }
 }
