@@ -1,4 +1,5 @@
 ﻿using ShapeOptimization.Interfaces;
+using ShapeOptimization.Models;
 using System;
 using System.Windows;
 
@@ -60,7 +61,7 @@ namespace ShapeOptimization.ViewModels
 
         public override void MouseDown(Point position)
         {
-            if (MainWindowViewModel.Mode == MainWindowViewModel.EditMode.SelectItem)
+            if (MainWindowViewModel.Mode == EditMode.SelectItem)
                 Select();
             //TODO:
             //Check whether it's closer to the start point, end point, or center

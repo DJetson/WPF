@@ -1,4 +1,5 @@
-﻿using ShapeOptimization.ViewModels;
+﻿using ShapeOptimization.Models;
+using ShapeOptimization.ViewModels;
 using System;
 using System.Windows.Input;
 
@@ -26,7 +27,7 @@ namespace ShapeOptimization.Commands
         {
             MainWindowViewModel Parameter = parameter as MainWindowViewModel;
 
-            Parameter.SetMode(MainWindowViewModel.EditMode.AddLine);
+            Parameter.SetMode(EditMode.AddLine);
         }
     }
 }

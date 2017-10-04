@@ -1,4 +1,5 @@
 ﻿using ShapeOptimization.Interfaces;
+using ShapeOptimization.Models;
 using System.Windows;
 
 namespace ShapeOptimization.ViewModels
@@ -31,7 +32,7 @@ namespace ShapeOptimization.ViewModels
         {
             _IsMouseDown = true;
 
-            if (MainWindowViewModel.Mode == MainWindowViewModel.EditMode.SelectItem)
+            if (MainWindowViewModel.Mode == EditMode.SelectItem)
                 Select();
         }
 

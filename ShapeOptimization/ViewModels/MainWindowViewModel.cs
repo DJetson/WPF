@@ -1,5 +1,6 @@
 ﻿using ShapeOptimization.Classes;
 using ShapeOptimization.Interfaces;
+using ShapeOptimization.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -8,8 +9,6 @@ namespace ShapeOptimization.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, IHandlesMouseEvents
     {
-        public enum EditMode { None, AddPoint, AddLine, SelectItem };
-
         private static EditMode _Mode = EditMode.None;
         private bool _IsMousePressed = false;
 
