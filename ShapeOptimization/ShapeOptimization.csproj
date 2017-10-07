@@ -67,7 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Adorners\AdornerExtension.cs" />
-    <Compile Include="Behaviors\AttachAdorners.cs" />
+    <Compile Include="Behaviors\XamlAdorner.cs" />
     <Compile Include="Behaviors\TrackMouseBase.cs" />
     <Compile Include="Behaviors\TrackMouseDown.cs" />
     <Compile Include="Behaviors\TrackMouseEvents.cs" />
@@ -91,6 +91,30 @@
     <Compile Include="Views\PointView.xaml.cs">
       <DependentUpon>PointView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Adorners\Adorners.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Adorners\SelectionAdorner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\LineToolButtonIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\SelectToolButtonIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\PointToolButtonIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LineView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
