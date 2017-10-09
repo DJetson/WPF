@@ -32,7 +32,7 @@ namespace ShapeOptimization.Behaviors
 
         private void HandleMouseMove()
         {
-            var context = AssociatedObject.DataContext as IHandlesMouseMove;
+            var context = AssociatedObject.DataContext as IHandlesMouseEvents;
             context?.MouseMove(Mouse.GetPosition(Parent ?? AssociatedObject));
         }
 
@@ -47,7 +47,7 @@ namespace ShapeOptimization.Behaviors
 
         private void HandleMouseUp()
         {
-            var context = AssociatedObject.DataContext as IHandlesMouseUp;
+            var context = AssociatedObject.DataContext as IHandlesMouseEvents;
             context?.MouseUp(Mouse.GetPosition(Parent ?? AssociatedObject));
         }
 
@@ -62,7 +62,7 @@ namespace ShapeOptimization.Behaviors
 
         private void HandleMouseDown()
         {
-            var context = AssociatedObject.DataContext as IHandlesMouseDown;
+            var context = AssociatedObject.DataContext as IHandlesMouseEvents;
             context?.MouseDown(Mouse.GetPosition(Parent ?? AssociatedObject));
         }
     }

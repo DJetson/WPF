@@ -4,5 +4,6 @@
         <ResourceDictionary Source="./PointToolButtonIcon.xaml"/>
         <ResourceDictionary Source="./LineToolButtonIcon.xaml"/>
         <ResourceDictionary Source="./SelectToolButtonIcon.xaml"/>
+        <ResourceDictionary Source="./SetTargetToolButtonIcon.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

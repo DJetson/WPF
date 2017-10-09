@@ -5,10 +5,17 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Behaviors="clr-namespace:ShapeOptimization.Behaviors"
+        xmlns:Commands="clr-namespace:ShapeOptimization.Commands"
         xmlns:ViewModels="clr-namespace:ShapeOptimization.ViewModels"
         xmlns:Views="clr-namespace:ShapeOptimization.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Commands:SelectAddLineToolCommand x:Key="SelectAddLineToolCommand"/>
+        <Commands:SelectAddPointToolCommand x:Key="SelectAddPointToolCommand"/>
+        <Commands:SelectSelectionToolCommand x:Key="SelectSelectionToolCommand"/>
+        <Commands:SelectTargetToolCommand x:Key="SelectTargetToolCommand"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,13 +25,15 @@
         <ToolBar Grid.Row="1">
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddPointMode}" Content="{StaticResource PointToolButtonIcon}"/>
-                <RadioButton Grid.Column="1" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddLineMode}" Content="{StaticResource LineToolButtonIcon}"/> 
-                <RadioButton Grid.Column="2" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInSelectItemMode}" Content="{StaticResource SelectToolButtonIcon}"/>
+                <RadioButton Grid.Column="0" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddPointMode, Mode=OneWay}" Content="{StaticResource PointToolButtonIcon}" Command="{StaticResource SelectAddPointToolCommand}" CommandParameter="{Binding }"/>
+                <RadioButton Grid.Column="1" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddLineMode, Mode=OneWay}" Content="{StaticResource LineToolButtonIcon}" Command="{StaticResource SelectAddLineToolCommand}" CommandParameter="{Binding }"/>
+                <RadioButton Grid.Column="2" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInSelectMode, Mode=OneWay}" Content="{StaticResource SelectToolButtonIcon}" Command="{StaticResource SelectSelectionToolCommand}" CommandParameter="{Binding }"/>
+                <RadioButton Grid.Column="3" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInSetTargetMode, Mode=OneWay}" Content="{StaticResource SetTargetToolButtonIcon}" Command="{StaticResource SelectTargetToolCommand}" CommandParameter="{Binding }"/>
             </Grid>
         </ToolBar>
 
@@ -35,6 +44,11 @@
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type ViewModels:PointViewModel}">
                     <Views:PointView DataContext="{Binding }"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:PointTargetViewModel}">
+                    <Grid>
+                        <Views:PointView DataContext="{Binding }" Opacity="0.5"/>
+                    </Grid>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type ViewModels:LineViewModel}">
                     <Views:LineView DataContext="{Binding }"/>

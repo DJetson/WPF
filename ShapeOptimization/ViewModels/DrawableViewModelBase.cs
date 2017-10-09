@@ -37,5 +37,11 @@ namespace ShapeOptimization.ViewModels
         {
             Position = new Point(x, y);
         }
+
+        public abstract void MouseDown(Point position);
+
+        public abstract void MouseMove(Point position);
+
+        public abstract void MouseUp(Point position);
     }
 }

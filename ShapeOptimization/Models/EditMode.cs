@@ -6,5 +6,6 @@
         AddPoint,
         AddLine,
         SelectItem,
+        SetTarget
     }
 }

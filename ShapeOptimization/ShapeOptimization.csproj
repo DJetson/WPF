@@ -74,17 +74,34 @@
     <Compile Include="Behaviors\TrackMouseMove.cs" />
     <Compile Include="Behaviors\TrackMouseUp.cs" />
     <Compile Include="Classes\SelectionContext.cs" />
+    <Compile Include="Classes\Tools\AddLineTool.cs" />
+    <Compile Include="Classes\Tools\AddPointTool.cs" />
+    <Compile Include="Classes\Tools\SelectTool.cs" />
+    <Compile Include="Classes\Tools\SetTargetTool.cs" />
+    <Compile Include="Classes\Tools\ToolBase.cs" />
+    <Compile Include="Commands\SelectAddLineToolCommand.cs" />
+    <Compile Include="Commands\SelectAddPointToolCommand.cs" />
+    <Compile Include="Commands\SelectSelectionToolCommand.cs" />
+    <Compile Include="Commands\SelectTargetToolCommand.cs" />
+    <Compile Include="Commands\SelectToolCommandBase.cs" />
     <Compile Include="Interfaces\IDrawableItem.cs" />
-    <Compile Include="Interfaces\IHandlesMouseDown.cs" />
     <Compile Include="Interfaces\IHandlesMouseEvents.cs" />
-    <Compile Include="Interfaces\IHandlesMouseMove.cs" />
-    <Compile Include="Interfaces\IHandlesMouseUp.cs" />
+    <Compile Include="Interfaces\IHasDrawingContext.cs" />
+    <Compile Include="Interfaces\IHasPosition.cs" />
+    <Compile Include="Interfaces\IHasToolContext.cs" />
+    <Compile Include="Interfaces\IMainWindowViewModel.cs" />
     <Compile Include="Interfaces\ISelectionContext.cs" />
     <Compile Include="Interfaces\ISelectableItem.cs" />
+    <Compile Include="Interfaces\ISelectToolCommand.cs" />
+    <Compile Include="Interfaces\ITargetViewModel.cs" />
+    <Compile Include="Interfaces\ITool.cs" />
     <Compile Include="Models\EditMode.cs" />
     <Compile Include="ViewModels\DrawableViewModelBase.cs" />
+    <Compile Include="Interfaces\IShapeViewModelBase.cs" />
     <Compile Include="ViewModels\LineViewModel.cs" />
+    <Compile Include="ViewModels\PointTargetViewModel.cs" />
     <Compile Include="ViewModels\SelectableItemViewModelBase.cs" />
+    <Compile Include="ViewModels\ShapeViewModelBase.cs" />
     <Compile Include="Views\LineView.xaml.cs">
       <DependentUpon>LineView.xaml</DependentUpon>
     </Compile>
@@ -112,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Icons\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\SetTargetToolButtonIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,5 +187,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

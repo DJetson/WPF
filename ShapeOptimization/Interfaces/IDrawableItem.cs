@@ -2,8 +2,8 @@
 
 namespace ShapeOptimization.Interfaces
 {
-    public interface IDrawableItem
+    public interface IDrawableItem : IHandlesMouseEvents, IHasPosition
     {
-        Point Position { get; set; }
+        Size Size { get; set; }
     }
 }

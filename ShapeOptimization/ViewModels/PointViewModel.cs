@@ -4,10 +4,8 @@ using System.Windows;
 
 namespace ShapeOptimization.ViewModels
 {
-    public class PointViewModel : SelectableItemViewModelBase
+    public class PointViewModel : ShapeViewModelBase
     {
-        private bool _IsMouseDown = false;
-
         public override double Left
         {
             get { return _Position.X - (Size.Width / 2); }
@@ -23,36 +21,23 @@ namespace ShapeOptimization.ViewModels
             Size = new Size(10, 10);
         }
 
-        public PointViewModel(ISelectionContext context, MainWindowViewModel parent) : base(context)
+        public PointViewModel(ISelectionContext context, IMainWindowViewModel parent) : base(context, parent)
         {
-            Parent = parent;
             Size = new Size(10, 10);
         }
 
-        private MainWindowViewModel Parent { get; }
-
         public override void MouseDown(Point position)
         {
-            _IsMouseDown = true;
+            IsMouseDown = true;
 
+            //If we're here it means that a specific object has been clicked
+            //TODO: Figure out where modified selection logic should go. (i.e. Modifier keys)
+            //TODO: This needs to handle MouseDown events for any kind of tool that has a single item behavior
+            //      This might mean that the tool has a general and a specific mouse down event
             if (Parent.Mode == EditMode.SelectItem)
                 Select();
-        }
-
-        public override void MouseMove(Point position)
-        {
-            if (_IsMouseDown)
-                Position = position;
-        }
-
-        public override void MouseUp(Point position)
-        {
-            if(_IsMouseDown)
-            {
-
-            }
-
-            _IsMouseDown = false;
+            else
+                base.MouseDown(position);
         }
     }
 }

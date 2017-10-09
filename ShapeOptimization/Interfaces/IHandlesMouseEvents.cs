@@ -1,6 +1,11 @@
-﻿namespace ShapeOptimization.Interfaces
+﻿using System.Windows;
+
+namespace ShapeOptimization.Interfaces
 {
-    public interface IHandlesMouseEvents : IHandlesMouseDown, IHandlesMouseMove, IHandlesMouseUp
+    public interface IHandlesMouseEvents
     {
+        void MouseDown(Point position);
+        void MouseMove(Point position);
+        void MouseUp(Point position);
     }
 }

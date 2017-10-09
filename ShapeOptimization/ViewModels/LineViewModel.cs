@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace ShapeOptimization.ViewModels
 {
-    public class LineViewModel : SelectableItemViewModelBase, IHandlesMouseEvents
+    public class LineViewModel : ShapeViewModelBase, IHandlesMouseEvents
     {
         public override double Left
         {
@@ -47,25 +47,28 @@ namespace ShapeOptimization.ViewModels
             Size = new Size(path.Length, Size.Height);
         }
 
-        private bool _IsMouseDown = false;
-
         protected LineViewModel() : base()
         {
             Size = new Size(0, 10);
         }
 
-        public LineViewModel(ISelectionContext context, MainWindowViewModel parent) : base(context)
+        public LineViewModel(ISelectionContext context, IMainWindowViewModel parent) : base(context, parent)
         {
-            Parent = parent;
             Size = new Size(0, 10);
         }
 
-        private MainWindowViewModel Parent { get; }
-
         public override void MouseDown(Point position)
         {
+            IsMouseDown = true;
+
+            //If we're here it means that a specific object has been clicked
+            //TODO: Figure out where modified selection logic should go. (i.e. Modifier keys)
+            //TODO: This needs to handle MouseDown events for any kind of tool that has a single item behavior
+            //      This might mean that the tool has a general and a specific mouse down event
             if (Parent.Mode == EditMode.SelectItem)
                 Select();
+            else
+                base.MouseDown(position);
             //TODO:
             //Check whether it's closer to the start point, end point, or center
             //track which of the above three and the start point of the path we're about to trace
@@ -76,11 +79,6 @@ namespace ShapeOptimization.ViewModels
             //TODO:
             //If the closest existing point is the center, begin moving the entire line to the new position
             //Otherwise, move the appropriate terminating point (closest of start or end) to the new position
-        }
-
-        public override void MouseUp(Point position)
-        {
-            //End Move process
         }
     }
 }

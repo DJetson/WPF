@@ -1,87 +1,67 @@
 ﻿using ShapeOptimization.Classes;
+using ShapeOptimization.Classes.Tools;
 using ShapeOptimization.Interfaces;
 using ShapeOptimization.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
 namespace ShapeOptimization.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase, IHandlesMouseEvents
+    public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
-        private EditMode _Mode = EditMode.None;
-        private bool _IsMousePressed = false;
+        private Dictionary<EditMode, ITool> _Tools
+            => new Dictionary<EditMode, ITool>
+            {
+                { EditMode.AddPoint, GetTool<AddPointTool>(EditMode.AddPoint) },
+                { EditMode.AddLine, GetTool<AddLineTool>(EditMode.AddLine) },
+                { EditMode.SelectItem, GetTool<SelectTool>(EditMode.SelectItem) },
+                { EditMode.SetTarget, GetTool<SetTargetTool>(EditMode.SetTarget) }
+            };
+
+        private ITool GetTool<T>(EditMode mode) where T : ITool, new()
+        {
+            ITool tool = new T { Parent = this };
+
+            return tool;
+        }
+
+        private ITool _SelectedTool;
+        public ITool SelectedTool
+        {
+            get { return _SelectedTool; }
+            private set { _SelectedTool = value; }
+        }
 
         public bool IsInAddPointMode
         {
-            get
-            {
-                return _Mode == EditMode.AddPoint;
-            }
-
-            set
-            {
-                if (value)
-                {
-                    _Mode = EditMode.AddPoint;
-                }
-                else
-                {
-                    _Mode = EditMode.None;
-                }
-
-                NotifyPropertyChanged(nameof(IsInAddLineMode));
-                NotifyPropertyChanged(nameof(IsInAddPointMode));
-                NotifyPropertyChanged(nameof(IsInSelectItemMode));
-            }
+            get => SelectedTool is AddPointTool;
+            set { if (value) SetMode(EditMode.AddPoint); }
         }
 
         public bool IsInAddLineMode
         {
-            get
-            {
-                return _Mode == EditMode.AddLine;
-            }
-
-            set
-            {
-                if (value)
-                {
-                    _Mode = EditMode.AddLine;
-                }
-                else
-                {
-                    _Mode = EditMode.None;
-                }
-
-                NotifyPropertyChanged(nameof(IsInAddLineMode));
-                NotifyPropertyChanged(nameof(IsInAddPointMode));
-                NotifyPropertyChanged(nameof(IsInSelectItemMode));
-            }
+            get => SelectedTool is AddLineTool;
+            set { if (value) SetMode(EditMode.AddLine); }
         }
 
-        public bool IsInSelectItemMode
+        public bool IsInSelectMode
         {
-            get
-            {
-                return _Mode == EditMode.SelectItem;
-            }
+            get => SelectedTool is SelectTool;
+            set { if (value) SetMode(EditMode.SelectItem); }
+        }
 
-            set
-            {
-                if (value)
-                {
-                    _Mode = EditMode.SelectItem;
-                }
-                else
-                {
-                    _Mode = EditMode.None;
-                }
+        public bool IsInSetTargetMode
+        {
+            get => SelectedTool is SetTargetTool;
+            set { if (value) SetMode(EditMode.SetTarget); }
+        }
 
-                NotifyPropertyChanged(nameof(IsInAddLineMode));
-                NotifyPropertyChanged(nameof(IsInAddPointMode));
-                NotifyPropertyChanged(nameof(IsInSelectItemMode));
-            }
+        public MainWindowViewModel()
+        {
+            SelectedTool = _Tools[EditMode.AddPoint];
         }
 
         private ObservableCollection<IDrawableItem> _Items = new ObservableCollection<IDrawableItem>();
@@ -91,6 +71,7 @@ namespace ShapeOptimization.ViewModels
             set { _Items = value; NotifyPropertyChanged(); }
         }
 
+        private EditMode _Mode = EditMode.None;
         public EditMode Mode { get => _Mode; }
 
         private ISelectionContext _SelectionContext = new SelectionContext();
@@ -99,22 +80,28 @@ namespace ShapeOptimization.ViewModels
         public void SetMode(EditMode newMode)
         {
             _Mode = newMode;
+            SelectedTool = _Tools[_Mode];
+        }
+
+        public ITool SetTool(Type toolType)
+        {
+            if (!toolType.GetInterfaces().Contains(typeof(ITool)))
+                throw new ArgumentException($"Cannot execute SetTool({toolType.Name}). It requires the runtime Type for a class which implements the ITool interface.");
+
+            var lastTool = SelectedTool;
+            SetMode(_Tools.Where(e => e.Value.GetType() == toolType).Select(e => e.Key).First());
+
+            return lastTool;
         }
 
         public void MouseMove(Point position)
         {
+            SelectedTool.MouseMove(position);
         }
 
         public void MouseDown(Point position)
         {
-            _IsMousePressed = true;
-
-            if (_Mode == EditMode.AddPoint)
-                AddPoint(position);
-            if (_Mode == EditMode.AddLine)
-                AddLine(position);
-            if (_Mode == EditMode.SelectItem)
-                DeselectAll();
+            SelectedTool.MouseDown(position);
         }
 
         private void DeselectAll()
@@ -124,17 +111,7 @@ namespace ShapeOptimization.ViewModels
 
         public void MouseUp(Point position)
         {
-            if (_Mode == EditMode.AddPoint)
-            {
-                Items.Last().Position = position;
-            }
-            if (_Mode == EditMode.AddLine)
-            {
-                var current = Items.Last(e => e is LineViewModel) as LineViewModel;
-                current.End = position;
-            }
-
-            _IsMousePressed = false;
+            SelectedTool.MouseUp(position);
         }
 
         private void AddLine(Point position)

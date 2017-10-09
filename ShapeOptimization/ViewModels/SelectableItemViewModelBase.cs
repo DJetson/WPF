@@ -42,11 +42,11 @@ namespace ShapeOptimization.ViewModels
             SelectionContext.Deselect(this);
         }
 
-        public abstract void MouseDown(Point position);
+        public override abstract void MouseDown(Point position);
 
-        public abstract void MouseMove(Point position);
+        public override abstract void MouseMove(Point position);
 
-        public abstract void MouseUp(Point position);
+        public override abstract void MouseUp(Point position);
 
     }
 }

@@ -21,7 +21,7 @@ namespace ShapeOptimization.Behaviors
 
         public override void Handle()
         {
-            var context = AssociatedObject.DataContext as IHandlesMouseUp;
+            var context = AssociatedObject.DataContext as IHandlesMouseEvents;
             context?.MouseUp(Mouse.GetPosition(Parent ?? AssociatedObject));
         }
 
