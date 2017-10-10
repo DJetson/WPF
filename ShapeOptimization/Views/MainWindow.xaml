@@ -53,6 +53,15 @@
                 <DataTemplate DataType="{x:Type ViewModels:LineViewModel}">
                     <Views:LineView DataContext="{Binding }"/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:RectangleViewModel}">
+                    <Grid>
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="{Binding Position.X}" Y="{Binding Position.Y}"/>
+                        </Grid.RenderTransform>
+                        <Rectangle Stroke="Black" StrokeThickness="1" StrokeDashArray="2,4,1,4" Width="{Binding Size.Width}" Height="{Binding Size.Height}">
+                    </Rectangle>
+                    </Grid>
+                </DataTemplate>
             </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

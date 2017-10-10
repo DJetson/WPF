@@ -12,7 +12,7 @@ namespace ShapeOptimization.Interfaces
         void SelectAll();
         void SelectAll(IEnumerable<ISelectableItem> items);
         void InvertSelection();
-        void Select(ISelectableItem item);
+        void Select(ISelectableItem item, bool? changeMultiSelectMode = null);
         void Deselect(ISelectableItem item);
         ISelectableItem Current { get; }
         bool IsMultiSelectEnabled { get; }

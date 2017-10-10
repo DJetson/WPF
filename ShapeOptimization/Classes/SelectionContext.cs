@@ -48,6 +48,7 @@ namespace ShapeOptimization.Classes
         public void ClearSelection()
         {
             _SelectedItems.ForEach(e => Deselect(e));
+            Current = null;
         }
 
         public void SelectAll()
@@ -57,7 +58,20 @@ namespace ShapeOptimization.Classes
 
         public void SelectAll(IEnumerable<ISelectableItem> items)
         {
-            items.ToList().ForEach(e => Select(e));
+            if (items.Count() == 0)
+                ClearSelection();
+
+            foreach (var item in items)
+            {
+                if (item == items.Last())
+                    Select(item, false);
+                else if (item == items.First())
+                    Select(item, true);
+                else
+                    Select(item);
+            }
+
+            //items.ToList().ForEach(e => Select(e));
         }
 
         public void InvertSelection()
@@ -65,22 +79,25 @@ namespace ShapeOptimization.Classes
             _SelectableItems.ToList().ForEach(e => { if (e.Value) Deselect(e.Key); Select(e.Key); });
         }
 
-        public void Select(ISelectableItem item)
+        public void Select(ISelectableItem item, bool? changeMultiSelectMode = null)
         {
             Register(item);
 
             if (IsMultiSelectEnabled == false && Current != null)
-                Deselect(Current);
+                ClearSelection();
 
             _SelectableItems[item] = true;
             Current = item;
             item.NotifyIsSelectedChanged();
+
+            if (changeMultiSelectMode.HasValue)
+                IsMultiSelectEnabled = changeMultiSelectMode.Value;
         }
 
         public void Deselect(ISelectableItem item)
         {
             Register(item);
-            int index = Math.Max(_SelectedItems.IndexOf(Current) - 1,0);
+            int index = Math.Max(_SelectedItems.IndexOf(Current) - 1, 0);
 
             _SelectableItems[item] = false;
 
