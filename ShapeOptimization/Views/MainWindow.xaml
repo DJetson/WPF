@@ -15,6 +15,7 @@
         <Commands:SelectAddPointToolCommand x:Key="SelectAddPointToolCommand"/>
         <Commands:SelectSelectionToolCommand x:Key="SelectSelectionToolCommand"/>
         <Commands:SelectTargetToolCommand x:Key="SelectTargetToolCommand"/>
+        <Commands:GroupItemsCommand x:Key="GroupItemsCommand"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,11 +30,13 @@
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
                 <RadioButton Grid.Column="0" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddPointMode, Mode=OneWay}" Content="{StaticResource PointToolButtonIcon}" Command="{StaticResource SelectAddPointToolCommand}" CommandParameter="{Binding }"/>
                 <RadioButton Grid.Column="1" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInAddLineMode, Mode=OneWay}" Content="{StaticResource LineToolButtonIcon}" Command="{StaticResource SelectAddLineToolCommand}" CommandParameter="{Binding }"/>
                 <RadioButton Grid.Column="2" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInSelectMode, Mode=OneWay}" Content="{StaticResource SelectToolButtonIcon}" Command="{StaticResource SelectSelectionToolCommand}" CommandParameter="{Binding }"/>
                 <RadioButton Grid.Column="3" Style="{StaticResource {x:Type ToggleButton}}" GroupName="ModeGroup" IsChecked="{Binding IsInSetTargetMode, Mode=OneWay}" Content="{StaticResource SetTargetToolButtonIcon}" Command="{StaticResource SelectTargetToolCommand}" CommandParameter="{Binding }"/>
+                <Button Grid.Column="4" Content="Group" Command="{StaticResource GroupItemsCommand}" CommandParameter="{Binding }"/>
             </Grid>
         </ToolBar>
 
@@ -59,7 +62,15 @@
                             <TranslateTransform X="{Binding Position.X}" Y="{Binding Position.Y}"/>
                         </Grid.RenderTransform>
                         <Rectangle Stroke="Black" StrokeThickness="1" StrokeDashArray="2,4,1,4" Width="{Binding Size.Width}" Height="{Binding Size.Height}">
-                    </Rectangle>
+                        </Rectangle>
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:GroupViewModel}">
+                    <Grid>
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="{Binding Left}" Y="{Binding Top}"/>
+                        </Grid.RenderTransform>
+                        <Rectangle Stroke="Green" StrokeThickness="1" Width="{Binding Size.Width}" Height="{Binding Size.Height}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.Resources>

@@ -123,5 +123,14 @@ namespace ShapeOptimization.ViewModels
         {
             Items.Add(new PointViewModel(SelectionContext, this) { Position = position });
         }
+
+        public void CreateGroup()
+        {
+            var group = new GroupViewModel(SelectionContext, this);
+
+            group.AddRange(SelectionContext.SelectedItems.ToList().Select(e => e as IGroupableItem).Where(e => e != null));
+
+            Items.Add(group);
+        }
     }
 }

@@ -9,13 +9,17 @@ using System.Windows;
 
 namespace ShapeOptimization.ViewModels
 {
-    public abstract class ShapeViewModelBase : SelectableItemViewModelBase, IShapeViewModelBase
+    public abstract class ShapeViewModelBase : SelectableItemViewModelBase, IShapeViewModelBase, IGroupableItem
     {
         protected bool IsMouseDown { get; set; }
 
         public override abstract double Left { get; }
 
         public override abstract double Top { get; }
+
+        public override abstract double Right { get; }
+
+        public override abstract double Bottom { get; }
 
         public IMainWindowViewModel Parent { get; }
 
@@ -24,6 +28,19 @@ namespace ShapeOptimization.ViewModels
         {
             get { return _Target; }
             set { _Target = value; NotifyPropertyChanged(); }
+        }
+
+        public Point LocalPosition
+        {
+            get { return (Point)(_Position - (DrawableParent?.Position ?? new Point(0, 0))); }
+            set { Position = (value + (Vector)(DrawableParent?.Position ?? new Point(0, 0))); NotifyPropertyChanged(); }
+        }
+
+        private IDrawableItem _DrawableParent = null;
+        public IDrawableItem DrawableParent
+        {
+            get { return _DrawableParent; }
+            set { _DrawableParent = value; NotifyPropertyChanged(); NotifyPropertyChanged("LocalPosition"); }
         }
 
         protected ShapeViewModelBase() : base()

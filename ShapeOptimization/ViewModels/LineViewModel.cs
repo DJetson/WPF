@@ -17,6 +17,16 @@ namespace ShapeOptimization.ViewModels
             get { return Math.Min(Start.Y, End.Y); }
         }
 
+        public override double Right
+        {
+            get { return _Position.X + (Size.Width / 2); }
+        }
+
+        public override double Bottom
+        {
+            get { return _Position.Y + (Size.Height / 2); }
+        }
+
         private double _Angle;
         public double Angle
         {

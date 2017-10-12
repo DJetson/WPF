@@ -9,19 +9,32 @@ namespace ShapeOptimization.ViewModels
         public Size Size
         {
             get { return _Size; }
-            set { _Size = value; NotifyPropertyChanged(); NotifyPropertyChanged("Top"); NotifyPropertyChanged("Left"); }
+            set { _Size = value; NotifyPropertyChanged(); NotifyBoundsChanged(); }
         }
 
         protected Point _Position;
         public Point Position
         {
             get { return _Position; }
-            set { _Position = value; NotifyPropertyChanged(); NotifyPropertyChanged("Top"); NotifyPropertyChanged("Left"); }
+            set { _Position = value; NotifyPropertyChanged(); NotifyBoundsChanged(); }
         }
 
         public abstract double Left { get; }
 
         public abstract double Top { get; }
+
+        public abstract double Right { get; }
+
+        public abstract double Bottom { get; }
+
+        protected void NotifyBoundsChanged()
+        {
+            NotifyPropertyChanged("Top");
+            NotifyPropertyChanged("Left");
+            NotifyPropertyChanged("Right");
+            NotifyPropertyChanged("Bottom");
+
+        }
 
         public DrawableViewModelBase()
         {

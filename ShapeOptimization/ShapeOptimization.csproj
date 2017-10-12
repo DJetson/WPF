@@ -79,12 +79,14 @@
     <Compile Include="Classes\Tools\SelectTool.cs" />
     <Compile Include="Classes\Tools\SetTargetTool.cs" />
     <Compile Include="Classes\Tools\ToolBase.cs" />
+    <Compile Include="Commands\GroupItemsCommand.cs" />
     <Compile Include="Commands\SelectAddLineToolCommand.cs" />
     <Compile Include="Commands\SelectAddPointToolCommand.cs" />
     <Compile Include="Commands\SelectSelectionToolCommand.cs" />
     <Compile Include="Commands\SelectTargetToolCommand.cs" />
     <Compile Include="Commands\SelectToolCommandBase.cs" />
     <Compile Include="Interfaces\IDrawableItem.cs" />
+    <Compile Include="Interfaces\IGroupableItem.cs" />
     <Compile Include="Interfaces\IHandlesMouseEvents.cs" />
     <Compile Include="Interfaces\IHasDrawingContext.cs" />
     <Compile Include="Interfaces\IHasPosition.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Models\EditMode.cs" />
     <Compile Include="ViewModels\DrawableViewModelBase.cs" />
     <Compile Include="Interfaces\IShapeViewModelBase.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\LineViewModel.cs" />
     <Compile Include="ViewModels\PointTargetViewModel.cs" />
     <Compile Include="ViewModels\RectangleViewModel.cs" />

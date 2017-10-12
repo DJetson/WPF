@@ -9,5 +9,7 @@ namespace ShapeOptimization.Interfaces
     public interface IMainWindowViewModel : IHasDrawingContext, IHasToolContext, IHandlesMouseEvents
     {
         ISelectionContext SelectionContext { get; }
+
+        void CreateGroup();
     }
 }
